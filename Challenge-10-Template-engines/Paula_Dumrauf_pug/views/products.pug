@@ -1,0 +1,21 @@
+extends index.pug
+
+block content 
+    h1='Products'
+    div
+        if (productsArr.length)
+            table(class="table")
+                thead
+                    tr
+                        th(scope="col") Name
+                        th(scope="col") Price
+                        th(scope="col") Photo
+                tbody
+                    each product in productsArr
+                        tr
+                            td= product.name
+                            td= product.price
+                            td(class="img-fluid")
+                                img(src=product.thumbnail alt="product image")
+        else 
+            p No products found

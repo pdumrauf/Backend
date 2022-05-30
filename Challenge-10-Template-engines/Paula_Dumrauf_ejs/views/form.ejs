@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head')%>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <%- include('./partials/header', { current: 'form' }) %>
+        </header>
+        <main>
+            <div class="jumbotron">
+                <h2>Add a product</h2>
+                <form method="POST" action="/products">
+                    <div class="form-group">
+                      <label for="name">Product</label>
+                      <input type="text" class="form-control" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="text" class="form-control" name="price">
+                      </div>
+                      <div class="form-group">
+                        <label for="thumbnail">Photo URL</label>
+                        <input type="text" class="form-control" name="thumbnail">
+                      </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+extends index.pug
+
+block content 
+    main 
+        div(class="jumbotron")
+            h2='Add a product'
+            form(method='POST' action='/products')
+                div(class='form-group')
+                    label(for='name') Product 
+                    input(type='text' class='form-control' name='name')
+                div(class='form-group')
+                    label(for='price') Price 
+                    input(type='text' class='form-control' name='price')
+                div(class='form-group')
+                    label(for='thumbanail') Product 
+                    input(type='text' class='form-control' name='thumbnail')
+                button(type="submit" class="btn btn-primary") Submit

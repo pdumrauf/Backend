@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <header>
+            {{> header}}
+        </header>
+        <main>
+            <h1>Products</h1>
+            <div>
+                {{#if productsArr.length}}
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Photo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{#each productsArr}}
+                      <tr>
+                        <td>{{this.name}}</td>
+                        <td>{{this.price}}</td>
+                        <td class="img-fluid"><img src={{this.thumbnail}} alt="product image"></img></td>
+                      </tr>
+                      {{/each}}
+                    </tbody>
+                  </table>
+                  {{else}}
+                  No products found
+                {{/if}}
+              </div>
+        </main>
+    </div>
+</body>
+</html>

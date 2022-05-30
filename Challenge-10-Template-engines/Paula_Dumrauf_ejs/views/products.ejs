@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head')%>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <%- include('./partials/header', { current: 'products'}) %>
+        </header>
+        <main>
+            <h1>Products</h1>
+            <div>
+                <% if(productsArr.length) { %>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Photo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% productsArr.forEach((product, index) => { %>
+                      <tr>
+                        <td><%= product.name %></td>
+                        <td><%= product.price %></td>
+                        <td class="img-fluid"><img src="<%=product.thumbnail%>" alt="product image"></img></td>
+                      </tr>
+                      <% }) %>
+                    </tbody>
+                  </table>
+                <% } else { %>
+                  No products found
+                <% } %>
+              </div>
+        </main>
+    </div>
+</body>
+</html>
