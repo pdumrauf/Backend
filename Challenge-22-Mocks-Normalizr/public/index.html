@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+            integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+            crossorigin="anonymous"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+        <link rel="stylesheet" href="./styles.css" />
+        <title>Websockets</title>
+        <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <!--FORM-->
+            <div class="jumbotron mt-4">
+                <h2 class="mb-3">Ingresar productos</h2>
+                <div>
+                    <div class="form-group">
+                        <label for="title">Titulo</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="title"
+                            name="title"
+                            placeholder="Ingresar titulo del producto"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Precio</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="price"
+                            name="price"
+                            placeholder="Ingresar precio del producto"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="thumbnail">URL</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="thumbnail"
+                            name="thumbnail"
+                            placeholder="Ingresar URL del producto"
+                            required
+                        />
+                    </div>
+                    <button id="submitBtn" class="btn btn-primary mt-2">
+                        Submit
+                    </button>
+                </div>
+            </div>
+            <!--PRODUCTOS-->
+            <div class="jumbotron mt-4" id="productsTable">
+                <h2 class="mb-3">Productos</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Thumbnail</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+            <!--CHAT-->
+            <div class="jumbotron">
+                <h2 class="mb-3">Chat</h2>
+                <span id="notifications"></span>
+                <div class="mb-3" id="loginInputGroup">
+                    <input
+                        type="email"
+                        class="form-control"
+                        placeholder="Ingresar email"
+                        id="emailInput"
+                    />
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Ingresar nombre"
+                        id="nameInput"
+                    />
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Ingresar apellido"
+                        id="lastnameInput"
+                    />
+                    <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Ingresar edad"
+                        id="ageInput"
+                    />
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Ingresar alias"
+                        id="aliasInput"
+                    />
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Ingresar URL de avatar"
+                        id="avatarInput"
+                    />
+
+                    <div class="input-group-append">
+                        <button
+                            class="btn btn-outline-secondary"
+                            type="button"
+                            id="loginBtn"
+                            disabled
+                        >
+                            Ingresar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-group mb-3" id="chatInputGroup">
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Ingrese un mensaje"
+                        aria-describedby="button-addon2"
+                        id="chatInput"
+                    />
+                    <div class="input-group-append">
+                        <button
+                            class="btn btn-outline-secondary"
+                            type="button"
+                            id="chatBtn"
+                            disabled
+                        >
+                            Enviar
+                        </button>
+                    </div>
+                </div>
+
+                <div id="messages"></div>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.3/qs.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="./index.js"></script>
+    </body>
+</html>

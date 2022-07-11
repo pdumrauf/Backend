@@ -1,0 +1,29 @@
+{
+  "id": 1,
+  "messages": [
+    {
+      "text": "hi",
+      "author": {
+        "id": "pau@gmail.com",
+        "name": "paula",
+        "lastname": "dumrauf",
+        "age": "31",
+        "alias": "paudumrauf",
+        "avatar": "url"
+      },
+      "time": "11/6/2022 11:40:40"
+    },
+    {
+      "text": "este es un texto",
+      "author": {
+        "id": "pau@gmail.com.com",
+        "name": "pau",
+        "lastname": "bleble",
+        "age": "20",
+        "alias": "paulita",
+        "avatar": "url"
+      },
+      "time": "11/6/2022 11:40:51"
+    }
+  ]
+}
