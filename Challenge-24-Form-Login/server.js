@@ -4,7 +4,8 @@ const { Server: IOServer } = require("socket.io");
 const { engine } = require("express-handlebars");
 const Messages = require("./classes/Messages");
 const { faker } = require("@faker-js/faker");
-const normalizeMessages = require("./normalizeMessages");
+const normalizeMessages = require("./src/normalizeMessages");
+const replace = require("./src/loginNameReplace");
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
@@ -49,30 +50,36 @@ const products = []
 
 //login
 
-app.get('/login', (req, res) => {
-  const name = req.session?.name
-  if (name) {
-      res.redirect('/')
+app.get("/login", (req, res) => {
+  res.render("partials/login");
+});
+
+app.post("/login", (req, res) => {
+  req.session.username = req.body.username;
+  res.redirect("/index");
+});
+
+app.get("/index", async (req, res) => {
+  if (req.session.username) {
+      const parsedData = await replace(req.session.username);
+      res.send(parsedData);
   } else {
-      res.sendFile('/views/login.html', { root: __dirname })
+      res.redirect("/logout");
   }
-})
+});
 
-app.get('/logout', (req, res) => {
-  const name = req.session?.name
-  if (name) {
-      res.redirect('/')
-  } else {
-      res.sendFile('/views/logout.html', { root: __dirname })
-  }
-})
+app.get("/logout", (req, res) => {
+  const username = req.session.username;
+  return req.session.destroy((err) => {
+      if (!err) {
+          return res.render("partials/logout", { username });
+      }
 
+      return res.json({ error: err });
+  });
+});
 
-app.post('/login', (req, res) => {
-  req.session.nombre = req.body.nombre
-  res.redirect('/')
-})
-
+//products faker
 
 app.get("/products", async (req, res) => {
     return res.send(products);
