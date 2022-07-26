@@ -80,8 +80,8 @@ app.post("/login",
 );
 
 app.get("/", isAuthenticated, async (req, res) => {
-  const parsedData = await replace(req.user.email);
-  return res.send(parsedData);
+  const replacedData = await replace(req.user.email);
+  return res.send(replacedData);
 });
 
 app.get("/logout", isAuthenticated, (req, res, next) => {
