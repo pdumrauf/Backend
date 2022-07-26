@@ -1,34 +1,51 @@
 const express = require("express");
 const { Server: HttpServer } = require("http");
 const { Server: IOServer } = require("socket.io");
+const session = require('express-session');
 const { engine } = require("express-handlebars");
+const passport = require("passport");
+const flash = require("express-flash");
+const dotenv = require("dotenv");
+
+const connectDB = require("./config/db");
+const initializePassport = require("./config/passport");
+
 const Messages = require("./classes/Messages");
 const { faker } = require("@faker-js/faker");
 const normalizeMessages = require("./src/normalizeMessages");
-const replace = require("./src/loginNameReplace");
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
-
+const replace = require("./src/loginNameReplaced");
 
 const app = express()
 const httpServer = new HttpServer(app)
 const io = new IOServer(httpServer)
+
+const { isAuthenticated, isNotAuthenticated } = require("./middleware/auth");
+
+dotenv.config();
+connectDB(process.env.MONGODB_URI);
+initializePassport(passport);
 
 //middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static("./public"))
 app.use(session({
-  store: MongoStore.create({
-    mongoUrl: 'mongodb+srv://pdumrauf:viB5zqDP4jD4ngRl@cluster0.npggbm3.mongodb.net/users?retryWrites=true&w=majority',
-    ttl: 600
-  }),
-  secret: 'qwerty',
-  resave: true,
-  saveUninitialized: true
-}))
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    rolling: true,
+    cookie: {
+      maxAge: 1000 * 60 * 10,
+    },
+  })
+);
 
-const PORT = 8080;
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+app.use(express.static("./public"));
+
+const PORT = process.env.PORT || 8080;
 
 app.engine(
     "hbs",
@@ -48,40 +65,51 @@ app.set("view engine", "hbs")
 const users = []
 const products = []
 
-//login
+//login & register
 
-app.get("/login", (req, res) => {
+app.get("/login", isNotAuthenticated, (_req, res) => {
   res.render("partials/login");
 });
 
-app.post("/login", (req, res) => {
-  req.session.username = req.body.username;
-  res.redirect("/index");
+app.post("/login", 
+  passport.authenticate("login", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+    failureFlash: true,
+  })
+);
+
+app.get("/", isAuthenticated, async (req, res) => {
+  const parsedData = await replace(req.user.email);
+  return res.send(parsedData);
 });
 
-app.get("/index", async (req, res) => {
-  if (req.session.username) {
-      const parsedData = await replace(req.session.username);
-      res.send(parsedData);
-  } else {
-      res.redirect("/logout");
-  }
-});
-
-app.get("/logout", (req, res) => {
-  const username = req.session.username;
-  return req.session.destroy((err) => {
-      if (!err) {
-          return res.render("partials/logout", { username });
+app.get("/logout", isAuthenticated, (req, res, next) => {
+  const email = req.user.email;
+  req.logOut((err) => {
+      if (err) {
+          return next(err);
       }
-
-      return res.json({ error: err });
+      return res.render("partials/logout", { email });
   });
 });
 
+app.get("/register", isNotAuthenticated, (_req, res) => {
+  return res.render("partials/register");
+});
+
+app.post(
+  "/register",
+  passport.authenticate("register", {
+      successRedirect: "/",
+      failureRedirect: "/register",
+      failureFlash: true,
+  })
+);
+
 //products faker
 
-app.get("/products", async (req, res) => {
+app.get("/products", async (_req, res) => {
     return res.send(products);
 });
 
@@ -98,9 +126,9 @@ const getRandomProducts = (n) => {
   return products;
 };
 
-app.get("/api/products-test", (req, res) => {
+app.get("/api/products-test", (_req, res) => {
   const randomProducts = getRandomProducts(5);
-  return res.render("index", {
+  return res.render("partials/products-table", {
       products: randomProducts,
   })
 });
