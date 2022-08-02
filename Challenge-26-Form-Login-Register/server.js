@@ -6,6 +6,7 @@ const { engine } = require("express-handlebars");
 const passport = require("passport");
 const flash = require("express-flash");
 const dotenv = require("dotenv");
+const yargs = require("yargs");
 
 const connectDB = require("./config/db");
 const initializePassport = require("./config/passport");
@@ -14,6 +15,15 @@ const Messages = require("./classes/Messages");
 const { faker } = require("@faker-js/faker");
 const normalizeMessages = require("./src/normalizeMessages");
 const replace = require("./src/loginNameReplaced");
+
+const randomRouter = require("./routes/randomRouter");
+const args = yargs(process.argv.slice(2))
+    .default({
+        port: 8080,
+    })
+    .alias({
+        port: "p",
+    }).argv;
 
 const app = express()
 const httpServer = new HttpServer(app)
@@ -44,8 +54,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(express.static("./public"));
+app.use("/api", randomRouter);
 
-const PORT = process.env.PORT || 8080;
+//const PORT = process.env.PORT || 8080;
+const PORT = args.port || 8080;
 
 app.engine(
     "hbs",
@@ -106,6 +118,19 @@ app.post(
       failureFlash: true,
   })
 );
+
+app.get("/info", (_req, res) => {
+  const data = {
+      args: JSON.stringify(args, null, 2),
+      os: process.platform,
+      nodeVersion: process.version,
+      path: process.execPath,
+      processId: process.pid,
+      folderPath: process.cwd(),
+      maxRSS: process.resourceUsage().maxRSS + " bytes",
+  };
+  return res.render("partials/info", { data: data });
+});
 
 //products faker
 
