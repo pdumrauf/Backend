@@ -1,14 +1,25 @@
-const { Router } = require("express");
+const express = require("express");
+const router = express.Router();
 const { fork } = require("child_process");
-const router = Router();
+const argv = require("../src/process.js");
+const cluster = require("cluster");
+cluster.schedulingPolicy = cluster.SCHED_RR;
 
-router.get("/randoms", (req, res) => {
-    const cant = req.query.cant || 1e8;
-    const result = fork("./routes/getRandomObject.js");
-    result.send(cant);
-    result.on("message", (result) => {
-        return res.json(result);
+router.get("/", async (req, res) => {
+  const repetitions = req.query.cant || 100000000;
+
+  if (argv.mode !== "cluster") {
+    const numbersFork = fork("./src/getRandomObject.js");
+    numbersFork.on("message", (result) => {
+      return res.status(200).send(result);
     });
+    numbersFork.send(repetitions);
+  } else {
+    let { generateRandoms } = require("../src/getRandomObject.js");
+    const result = generateRandoms(repetitions);
+
+    return res.status(200).send(result);
+  }
 });
 
 module.exports = router;

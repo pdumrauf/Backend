@@ -6,24 +6,17 @@ const { engine } = require("express-handlebars");
 const passport = require("passport");
 const flash = require("express-flash");
 const dotenv = require("dotenv");
-const yargs = require("yargs");
-
+const argv = require("./src/process");
 const connectDB = require("./config/db");
 const initializePassport = require("./config/passport");
-
 const Messages = require("./classes/Messages");
 const { faker } = require("@faker-js/faker");
 const normalizeMessages = require("./src/normalizeMessages");
 const replace = require("./src/loginNameReplaced");
+const cluster = require("cluster");
+const numCPUs = require("os").cpus().length;
 
 const randomRouter = require("./routes/randomRouter");
-const args = yargs(process.argv.slice(2))
-    .default({
-        port: 8080,
-    })
-    .alias({
-        port: "p",
-    }).argv;
 
 const app = express()
 const httpServer = new HttpServer(app)
@@ -57,7 +50,7 @@ app.use(express.static("./public"));
 app.use("/api", randomRouter);
 
 //const PORT = process.env.PORT || 8080;
-const PORT = args.port || 8080;
+//const PORT = argv.port || 8080;
 
 app.engine(
     "hbs",
@@ -115,19 +108,20 @@ app.post(
   passport.authenticate("register", {
       successRedirect: "/",
       failureRedirect: "/register",
-      failureFlash: true,
+      argv: true,
   })
 );
 
 app.get("/info", (_req, res) => {
   const data = {
-      args: JSON.stringify(args, null, 2),
+      argv: JSON.stringify(argv, null, 2),
       os: process.platform,
       nodeVersion: process.version,
       path: process.execPath,
       processId: process.pid,
       folderPath: process.cwd(),
       maxRSS: process.resourceUsage().maxRSS + " bytes",
+      numCPUs,
   };
   return res.render("partials/info", { data: data });
 });
@@ -193,6 +187,40 @@ app.get("/api/products-test", (_req, res) => {
 
 //conect to port
   
-  httpServer.listen(PORT, () =>
-    console.log(`Servidor escuchando en puerto ${PORT}`)
-  );
+/*httpServer.listen(PORT, () =>
+  console.log(`Servidor escuchando en puerto ${PORT}`)
+);*/
+
+if (argv.mode === "cluster") {
+  if (cluster.isPrimary) {
+    console.log(`Master ${process.pid} is running`);
+
+    for (let i = 0; i < numCPUs; i++) {
+      cluster.fork();
+    }
+
+    cluster.on("exit", (worker, code, signal) => {
+      console.log(`Worker ${worker.process.pid} died`);
+
+      cluster.fork();
+    });
+  } else {
+    httpServer
+      .listen(argv.port || 8080, () => {
+        console.log(`Worker process ${process.pid} started`);
+      })
+      .on("error", (err) => {
+        console.log(err);
+      });
+  }
+} else {
+  httpServer
+    .listen(argv.port || 8080, () => {
+      console.log(`App listening on port ${argv.port}!`);
+      console.log(`Worker process ${process.pid} started`);
+    })
+    .on("error", (err) => {
+      console.log(err);
+      throw err;
+    });
+}

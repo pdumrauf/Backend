@@ -1,0 +1,22 @@
+nodemon server.js (correr el servidor normalmente sin cluster)
+nodemon server.js --mode="fork" (correr el servidor normalmente sin cluster)
+nodemon server.js --mode="cluster" (correr el servidor con cluster incluido)
+
+forever start server.js --watch (inicio normal con su puerto)
+forever start server.js 8081 --watch (inicio normal con otro puerto, nuevo proceso) a pesar de ingresar y ver los dos procesos corriendo bien con forever list no me funciona al ingresar a otro port
+forever list (listar procesos, los que funcionan y los que han sido parados)
+
+ps aux | grep node (listar los procesos de node y ver los ids)
+
+forever stopall (detener todos los procesos)
+
+pm2 start server.js --name="main server" (Iniciar proceso en pm2 con modo fork y watching desactivado)
+pm2 start server.js --name="secondary server" --watching (Iniciar proceso con watching activado)
+pm2 delete all (borrar todos)
+pm2 start server.js -i max (para crear procesos cluster para la maxima cantidad de procesadores de cpu)
+pm2 start server.js -i max -- 8083 (para crear procesos cluster para la maxima cantidad de procesadores de cpu en otro puerto)
+pm2 start server.js --watch -i max (para crear procesos cluster para la maxima cantidad de procesadores de cpu con escucha)
+pm2 list (listar todos los procesos)
+pm2 monit (uso de monitor para detallada info de todos los procesos)
+pm2 stop all (detener todos los procesos)
+pm2 delete all (eliminar todos los procesos)
