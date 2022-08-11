@@ -3,10 +3,10 @@ nodemon server.js --mode="fork" (correr el servidor normalmente sin cluster)
 nodemon server.js --mode="cluster" (correr el servidor con cluster incluido)
 
 forever start server.js --watch (inicio normal con su puerto)
-forever start server.js 8081 --watch (inicio normal con otro puerto, nuevo proceso) a pesar de ingresar y ver los dos procesos corriendo bien con forever list no me funciona al ingresar a otro port
+forever start server.js 8081 --watch (inicio normal con otro puerto, nuevo proceso)
 forever list (listar procesos, los que funcionan y los que han sido parados)
 
-ps aux | grep node (listar los procesos de node y ver los ids)
+ps aux | grep node (listar los procesos de node y ver los ids de procesos, nose si estaba bien)
 
 forever stopall (detener todos los procesos)
 
