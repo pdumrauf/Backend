@@ -13,6 +13,8 @@ const { faker } = require("@faker-js/faker");
 const normalizeMessages = require("./src/normalizeMessages");
 const replace = require("./src/loginNameReplaced");
 const numCPUs = require("os").cpus().length;
+const compression = require("compression");
+const logger = require("./src/logs");
 
 const randomRouter = require("./routes/randomRouter");
 
@@ -22,7 +24,7 @@ const io = new IOServer(httpServer)
 
 const { isAuthenticated, isNotAuthenticated } = require("./middleware/authenticate");
 
-const process = (argv) => {
+const server = (argv) => {
   dotenv.config();
   connectDB(process.env.MONGODB_URI);
   initializePassport(passport);
@@ -47,9 +49,14 @@ const process = (argv) => {
   app.use(flash());
   app.use(express.static("./public"));
   app.use("/api", randomRouter);
+  //app.use(compression())
+  app.use((req, res, next) => {
+    logger.info(`Ruta: ${req.path} Metodo: ${req.method}`);
+    return next();
+});
   
   //const PORT = process.env.PORT || 8080;
-  //const PORT = argv.port || 8080;
+  const PORT = argv.port || 8080;
   
   app.engine(
       "hbs",
@@ -111,7 +118,7 @@ const process = (argv) => {
     })
   );
   
-  app.get("/info", (_req, res) => {
+  app.get("/info", compression(), (_req, res) => {
     const data = {
         argv: JSON.stringify(argv, null, 2),
         os: process.platform,
@@ -122,8 +129,15 @@ const process = (argv) => {
         maxRSS: process.resourceUsage().maxRSS + " bytes",
         numCPUs,
     };
+
+    console.log(data)
     return res.render("partials/info", { data: data });
   });
+
+  app.get("*", (req, res) => {
+    logger.warn(`Route: ${req.path} Method: ${req.method}`);
+    return res.status(404).json({ message: "page not found" });
+});
   
   //products faker
   
@@ -191,4 +205,4 @@ const process = (argv) => {
   );
 };
 
-module.exports = process;
+module.exports = server;

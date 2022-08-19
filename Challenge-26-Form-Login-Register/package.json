@@ -1,18 +1,22 @@
 {
   "name": "challenge-24-form-login",
   "version": "1.0.0",
-  "description": "",
-  "main": "normalizeMessages.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "node main.js",
+    "devStart": "nodemon main.js --ignore messages.json",
+    "start": "0x main.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@faker-js/faker": "^7.3.0",
+    "0x": "^5.4.1",
+    "artillery": "^2.0.0-23",
+    "autocannon": "^7.9.0",
     "bcrypt": "^5.0.1",
+    "compression": "^1.7.4",
     "connect-mongo": "^4.6.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
