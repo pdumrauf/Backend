@@ -1,7 +1,7 @@
 const cluster = require("cluster");
 const numCPUs = require("os").cpus().length;
 const yargs = require("yargs");
-const server = require("./server");
+const server = require("./src/server");
 
 const args = yargs(process.argv.slice(2))
     .default({

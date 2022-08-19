@@ -6,23 +6,22 @@ const { engine } = require("express-handlebars");
 const passport = require("passport");
 const flash = require("express-flash");
 const dotenv = require("dotenv");
-const connectDB = require("./config/db");
-const initializePassport = require("./config/passport");
-const Messages = require("./classes/Messages");
+const connectDB = require("../config/db");
+const initializePassport = require("../config/passport");
+const Messages = require("../classes/Messages");
 const { faker } = require("@faker-js/faker");
-const normalizeMessages = require("./src/normalizeMessages");
-const replace = require("./src/loginNameReplaced");
+const normalizeMessages = require("./normalizeMessages");
 const numCPUs = require("os").cpus().length;
 const compression = require("compression");
-const logger = require("./src/logs");
+const logger = require("./logs");
 
-const randomRouter = require("./routes/randomRouter");
+const randomRouter = require("../routes/randomRouter");
 
 const app = express()
 const httpServer = new HttpServer(app)
 const io = new IOServer(httpServer)
 
-const { isAuthenticated, isNotAuthenticated } = require("./middleware/authenticate");
+const { isAuthenticated, isNotAuthenticated } = require("../middleware/authenticate");
 
 const server = (argv) => {
   dotenv.config();

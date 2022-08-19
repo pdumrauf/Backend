@@ -28,3 +28,6 @@
 [2022-08-19T16:12:23.218] [WARN] custom - Route: /products/ Method: GET
 [2022-08-19T16:12:23.473] [WARN] custom - Route: /favicon.ico Method: GET
 [2022-08-19T16:12:35.794] [WARN] custom - Route: /we Method: GET
+[2022-08-19T16:18:05.833] [WARN] custom - Route: /favicon.ico Method: GET
+[2022-08-19T16:18:05.864] [WARN] custom - Route: /products/ Method: GET
+[2022-08-19T16:18:06.096] [WARN] custom - Route: /favicon.ico Method: GET
