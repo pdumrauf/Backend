@@ -49,7 +49,7 @@ const server = (argv) => {
   app.use(flash());
   app.use(express.static("./public"));
   app.use("/api", randomRouter);
-  //app.use(compression())
+  app.use(compression())
   app.use((req, res, next) => {
     logger.info(`Ruta: ${req.path} Metodo: ${req.method}`);
     return next();
@@ -91,8 +91,7 @@ const server = (argv) => {
   );
   
   app.get("/", isAuthenticated, async (req, res) => {
-    const replacedData = await replace(req.user.email);
-    return res.send(replacedData);
+    return res.render('main', { name: req.user.email})
   });
   
   app.get("/logout", isAuthenticated, (req, res, next) => {
@@ -118,7 +117,7 @@ const server = (argv) => {
     })
   );
   
-  app.get("/info", compression(), (_req, res) => {
+  app.get("/info", (_req, res) => {
     const data = {
         argv: JSON.stringify(argv, null, 2),
         os: process.platform,
