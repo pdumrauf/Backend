@@ -1,6 +1,6 @@
-const log4js = require("log4js");
+const log = require("log4js");
 
-log4js.configure({
+log.configure({
     appenders: {
         consoleLogger: { type: "console" },
         warningFileLogger: { type: "file", filename: "warning.log" },
