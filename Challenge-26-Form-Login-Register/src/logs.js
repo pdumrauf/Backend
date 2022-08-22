@@ -23,4 +23,4 @@ log.configure({
 });
 
 const logger = log.getLogger("custom");
-module.exports = logger;
+module.exports = logger
