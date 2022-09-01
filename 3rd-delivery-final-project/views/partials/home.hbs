@@ -1,0 +1,22 @@
+{{> navBar}}
+<div class="row">
+  {{#if allProducts.length}}
+      {{#each allProducts}}
+        <div class="col-md-3">
+          <div class="card" style="margin-top: 15px;">
+              <img class="card-img-top" src="{{this.photo_url}}" alt="Card image cap" style="margin: 0 auto; max-height: 200px; max-width: 200px; height: 200px; width: auto">
+              <div class="card-body">
+                  <h5 class="card-title">{{this.name}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{this.price}}</h6>
+                  <p class="card-text">{{this.description}}</p>
+                  <form action="/api/cart/{{../sanitizedUser.cart_id}}/products" method="POST">
+                      <input type="hidden" name="prod_id" value="{{this._id}}">
+                      <button type="submit" class="btn btn-primary btn-sm" >Buy</button>
+                  </form>
+              </div>
+          </div>
+        </div>
+      {{/each}}
+    {{else}}
+  {{/if}}
+</div>

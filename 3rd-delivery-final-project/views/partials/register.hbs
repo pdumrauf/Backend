@@ -1,0 +1,57 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+        <title>HBS</title>
+    </head>
+    <body>
+        <div class="container jumbotron mt-4">
+            <h1>Register</h1>
+            <form method="POST" action="/auth/register">
+                <label for="email">Email</label>
+                <br />
+                <input type="email" name="email" />
+                <br />
+                <label for="password">Password</label>
+                <br />
+                <input type="password" name="password" />
+                <br />
+                <label for="name">Name</label>
+                <br />
+                <input type="text" name="name" />
+                <br />
+                <label for="age">Age</label>
+                <br />
+                <input type="number" name="age" />
+                <br />
+                <label for="address">Address</label>
+                <br />
+                <input type="text" name="address" />
+                <br />
+                <label for="phone">Phone number</label>
+                <br />
+                <input type="text" name="phone" />
+                <br />
+                <label for="photo_url">Profile picture</label>
+                <br />
+                <input type="file" name="photo_url" accept="image/*" />
+                <br />
+
+                <button type="submit">Register</button>
+                <br />
+            </form>
+            <a href="/auth/login">Login</a>
+
+            {{#if messages.error}}
+                <div>{{messages.error}}</div>
+            {{/if}}
+        </div>
+    </body>
+</html>
