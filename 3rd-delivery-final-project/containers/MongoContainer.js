@@ -8,6 +8,7 @@ class MongoContainer {
     getItems = async () => {
         let arr = [];
         try {
+            //console.log(model);
             arr = await this.model.find({});
         } catch (err) {
             logger.error(err);
@@ -16,21 +17,23 @@ class MongoContainer {
     };
 
     getItemById = async (id) => {
-        let product = {};
+        let item = {};
         try {
-            product = this.model.findById(id);
+            item = this.model.findById(id);
         } catch (err) {
             logger.error(err);
         }
-        return product;
+        return item;
     };
 
     createItem = async (item) => {
         let newItem = new this.model(item);
+
         try {
             await newItem.save();
+            return newItem;
         } catch (err) {
-            logger.error(err);
+            throw Error(err);
         }
     };
 

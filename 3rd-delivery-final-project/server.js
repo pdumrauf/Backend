@@ -15,10 +15,10 @@ const middleware404 = require("./middleware/middleware404");
 
 dotenv.config();
 const PORT = process.env.PORT || 8080;
-connectDB(process.env.MONGODB_URI);
+connectDB(process.env.MONGODB_URI)
 
 if (process.env.STORAGE === "mongodb") Database.connect();
-app.use(express.static("./uploads"));
+app.use(express.static("./public/uploads"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -39,13 +39,13 @@ app.use(passport.session());
 app.use(flash());
 
 app.engine(
-    "hbs",
-    engine({
-        extname: ".hbs",
-        defaultLayout: `${__dirname}/views/index.hbs`,
-        layoutsDir: `${__dirname}/views/layouts`,
-        partialsDir: `${__dirname}/views/partials`,
-    })
+  "hbs",
+  engine({
+      extname: ".hbs",
+      defaultLayout: `${__dirname}/views/index.hbs`,
+      layoutsDir: `${__dirname}/views/layouts`,
+      partialsDir: `${__dirname}/views/partials`,
+  })
 );
 app.set("views", "./views");
 app.set("view engine", "hbs");

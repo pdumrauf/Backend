@@ -19,7 +19,7 @@ const sendMail = async (to, subject, content) => {
 
     try {
         const response = await transporter.sendMail(mailOptions);
-        console.log(response)
+        //console.log(response)
     } catch (e) {
         console.log(e);
     }

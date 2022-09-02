@@ -1,10 +1,10 @@
 <body>
     <div class="jumbotron">
-        <h1 class="alert alert-primary">See you, {{ email }}!</h1>
+        <h1 class="alert alert-primary">See you, {{ user.name }}!</h1>
     </div>
     <script>
         setTimeout(() => {
-            location.href = '/auth/login'
+            window.location = '/auth/login'
         }, 2000)
     </script>
 </body>

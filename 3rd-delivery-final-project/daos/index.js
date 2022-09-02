@@ -5,7 +5,7 @@ const cartDaoMemory = require("./carts/CartDaoMemory")
 const productsDaoMongoDB = require("./products/ProductsDaoMongoDB")
 const cartDaoMongoDB = require("./carts/CartDaoMongoDB")
 const userDaoMongoDB = require("./users/UserDaoMongoDB");
-const productsDaoFirebase = require("./products/ProductsDaoFirebase")
+const productsDaoFirebase = require("./products/ProductsDAOFirebase")
 const cartDaoFirebase = require("./carts/CartDaoFirebase")
 
 const getStorage = () => {

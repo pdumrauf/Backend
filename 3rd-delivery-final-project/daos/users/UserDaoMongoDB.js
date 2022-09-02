@@ -18,7 +18,6 @@ class UserDaoMongoDB extends MongoContainer {
     addCart = async (userId, cartId) => {
         try {
             const user = await this.model.findOneAndUpdate({ _id: userId }, { cart_id: cartId });
-            console.log(user)
             return cartId;
         } catch (err) {
             console.log(err);

@@ -7,9 +7,7 @@ const initialize = (passport) => {
     passport.use(
         "login",
         new LocalStrategy(
-            { usernameField: "email" },
-
-            async (email, password, done) => {
+            { usernameField: "email" }, async (email, password, done) => {
                 try {
                     const user = await users.getByEmail(email)
                     if (!user)
@@ -30,9 +28,13 @@ const initialize = (passport) => {
         )
     );
 
+    /*passReqToCallback option to true. 
+    With this option enabled, req will be passed as the first argument to the verify callback.
+    Added req as a parameter because if not it shows that "done" is not a function*/
+
     passport.use(
         "register",
-        new LocalStrategy({ usernameField: "email" }, async (email, password, done) => {
+        new LocalStrategy({ usernameField: "email", passReqToCallback: true }, async (req, email, password, done) => {
             try {
                 const user = await users.getByEmail(email)
                 if (user)
@@ -48,8 +50,8 @@ const initialize = (passport) => {
                     address: req.body.address,
                     phone: req.body.phone,
                     photo_url: req.file.filename,
-                    
                 };
+                //req.file admitted thanks to multer lib for avatars
 
                 const response = await users.createItem(newUser);
                 await sendEmail(process.env.ADMIN_EMAIL, "New register", JSON.stringify(newUser, null, 2));

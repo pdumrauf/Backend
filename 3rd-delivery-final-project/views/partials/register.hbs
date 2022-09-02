@@ -14,7 +14,7 @@
     <body>
         <div class="container jumbotron mt-4">
             <h1>Register</h1>
-            <form method="POST" action="/auth/register">
+            <form method="POST" action="/auth/register" enctype="multipart/form-data">
                 <label for="email">Email</label>
                 <br />
                 <input type="email" name="email" />
@@ -41,7 +41,7 @@
                 <br />
                 <label for="photo_url">Profile picture</label>
                 <br />
-                <input type="file" name="photo_url" accept="image/*" />
+                <input type="file" name="photo_url" accept="image/*"/>
                 <br />
 
                 <button type="submit">Register</button>

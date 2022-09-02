@@ -1,0 +1,114 @@
+[2022-09-02T12:42:32.424] [ERROR] custom - MongoServerError: bad auth : Authentication failed.
+    at Connection.onMessage (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection.js:210:30)
+    at MessageStream.<anonymous> (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\mongoose\node_modules\mongodb\lib\cmap\connection.js:63:60)
+    at MessageStream.emit (node:events:394:28)
+    at processIncomingData (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\mongoose\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\mongoose\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+    at _write (node:internal/streams/writable:330:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:334:10)
+    at TLSSocket.ondata (node:internal/streams/readable:747:22)
+    at TLSSocket.emit (node:events:394:28) {
+  ok: 0,
+  code: 8000,
+  codeName: 'AtlasError',
+  [Symbol(errorLabels)]: Set(1) { 'HandshakeError' }
+}
+[2022-09-02T15:39:53.117] [ERROR] custom - RestException [Error]: Authenticate
+    at success (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\lib\base\Version.js:135:15)
+    at Promise_then_fulfilled (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:766:44)
+    at Promise_done_fulfilled (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:835:31)
+    at Fulfilled_dispatch [as dispatch] (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:1229:9)
+    at Pending_become_eachMessage_task (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:1369:30)
+    at RawTask.call (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\asap\asap.js:40:19)
+    at flush (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\asap\raw.js:50:29)
+    at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+  status: 401,
+  code: 20003,
+  moreInfo: 'https://www.twilio.com/docs/errors/20003',
+  details: undefined
+}
+[2022-09-02T15:50:06.335] [ERROR] custom - RestException [Error]: Authenticate
+    at success (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\lib\base\Version.js:135:15)
+    at Promise_then_fulfilled (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:766:44)
+    at Promise_done_fulfilled (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:835:31)
+    at Fulfilled_dispatch [as dispatch] (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:1229:9)
+    at Pending_become_eachMessage_task (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:1369:30)
+    at RawTask.call (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\asap\asap.js:40:19)
+    at flush (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\asap\raw.js:50:29)
+    at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+  status: 401,
+  code: 20003,
+  moreInfo: 'https://www.twilio.com/docs/errors/20003',
+  details: undefined
+}
+[2022-09-02T16:01:01.859] [ERROR] custom - RestException [Error]: Authenticate
+    at success (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\lib\base\Version.js:135:15)
+    at Promise_then_fulfilled (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:766:44)
+    at Promise_done_fulfilled (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:835:31)
+    at Fulfilled_dispatch [as dispatch] (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:1229:9)
+    at Pending_become_eachMessage_task (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:1369:30)
+    at RawTask.call (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\asap\asap.js:40:19)
+    at flush (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\asap\raw.js:50:29)
+    at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+  status: 401,
+  code: 20003,
+  moreInfo: 'https://www.twilio.com/docs/errors/20003',
+  details: undefined
+}
+[2022-09-02T16:03:51.944] [ERROR] custom - RestException [Error]: Authenticate
+    at success (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\lib\base\Version.js:135:15)
+    at Promise_then_fulfilled (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:766:44)
+    at Promise_done_fulfilled (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:835:31)
+    at Fulfilled_dispatch [as dispatch] (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:1229:9)
+    at Pending_become_eachMessage_task (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:1369:30)
+    at RawTask.call (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\asap\asap.js:40:19)
+    at flush (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\asap\raw.js:50:29)
+    at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+  status: 401,
+  code: 20003,
+  moreInfo: 'https://www.twilio.com/docs/errors/20003',
+  details: undefined
+}
+[2022-09-02T16:15:09.479] [ERROR] custom - RestException [Error]: Authenticate
+    at success (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\lib\base\Version.js:135:15)
+    at Promise_then_fulfilled (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:766:44)
+    at Promise_done_fulfilled (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:835:31)
+    at Fulfilled_dispatch [as dispatch] (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:1229:9)
+    at Pending_become_eachMessage_task (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:1369:30)
+    at RawTask.call (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\asap\asap.js:40:19)
+    at flush (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\asap\raw.js:50:29)
+    at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+  status: 401,
+  code: 20003,
+  moreInfo: 'https://www.twilio.com/docs/errors/20003',
+  details: undefined
+}
+[2022-09-02T16:16:10.020] [ERROR] custom - RestException [Error]: Authenticate
+    at success (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\lib\base\Version.js:135:15)
+    at Promise_then_fulfilled (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:766:44)
+    at Promise_done_fulfilled (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:835:31)
+    at Fulfilled_dispatch [as dispatch] (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:1229:9)
+    at Pending_become_eachMessage_task (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:1369:30)
+    at RawTask.call (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\asap\asap.js:40:19)
+    at flush (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\asap\raw.js:50:29)
+    at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+  status: 401,
+  code: 20003,
+  moreInfo: 'https://www.twilio.com/docs/errors/20003',
+  details: undefined
+}
+[2022-09-02T16:29:53.581] [ERROR] custom - RestException [Error]: Authenticate
+    at success (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\lib\base\Version.js:135:15)
+    at Promise_then_fulfilled (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:766:44)
+    at Promise_done_fulfilled (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:835:31)
+    at Fulfilled_dispatch [as dispatch] (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:1229:9)
+    at Pending_become_eachMessage_task (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\twilio\node_modules\q\q.js:1369:30)
+    at RawTask.call (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\asap\asap.js:40:19)
+    at flush (C:\Pau\Dev\CoderHouse\Backend\3rd-delivery-final-project\node_modules\asap\raw.js:50:29)
+    at processTicksAndRejections (node:internal/process/task_queues:78:11) {
+  status: 401,
+  code: 20003,
+  moreInfo: 'https://www.twilio.com/docs/errors/20003',
+  details: undefined
+}

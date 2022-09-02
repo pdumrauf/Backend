@@ -2,6 +2,7 @@ const express = require("express");
 const { Router } = express;
 const passport = require("passport");
 const { checkAuthenticated, checkNotAuthenticated } = require("../middleware/authenticate");
+const upload = require('../src/multer')
 const authRouter = new Router();
 
 authRouter.get("/login", checkNotAuthenticated, (_req, res) => {
@@ -29,7 +30,9 @@ authRouter.post(
         failureRedirect: "/auth/register",
         failureFlash: true,
     })
+    
 );
+console.log(upload.single("photo_url"))
 
 authRouter.get("/logout", checkAuthenticated, (req, res, next) => {
     const user = { name: req.user.name };

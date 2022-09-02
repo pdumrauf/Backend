@@ -10,20 +10,21 @@ apiRouter.use(checkAuthenticated);
 apiRouter.get("/home", async (req, res) => {
     const user = await users.getItemById(req.user._id);
     const sanitizedUser = { name: user.name, photo_url: user.photo_url, _id: user._id, cart_id: user.cart_id };
-    console.log(sanitizedUser)
     if (!sanitizedUser.cart_id) {
-        const response = await carts.createCart(req.user._id);
-        await users.addCart(user._id, response._id);
+        const cartResponse = await carts.createCart(req.user._id);
+        await users.addCart(user._id, cartResponse._id);
     }
 
-    const response = await products.getItems();
-    const allProducts = response.map((product) => ({
+    const productResponse = await products.getItems();
+    const allProducts = productResponse.map((product) => ({
         name: product.name,
         photo_url: product.photo_url,
         description: product.description,
         price: product.price,
         _id: product._id,
     }));
+
+    //console.log(allProducts)
 
     return res.render("partials/home", { sanitizedUser, allProducts });
 });
