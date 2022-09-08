@@ -6,7 +6,7 @@ const productsDaoMongoDB = require("./products/ProductsDaoMongoDB")
 const cartDaoMongoDB = require("./carts/CartDaoMongoDB")
 const userDaoMongoDB = require("./users/UserDaoMongoDB");
 const productsDaoFirebase = require("./products/ProductsDAOFirebase")
-const cartDaoFirebase = require("./carts/CartDaoFirebase")
+const cartDaoFirebase = require("./carts/CartDAOFirebase")
 
 const getStorage = () => {
     const storage = process.env.STORAGE || "mongodb";
