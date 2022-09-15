@@ -1,8 +1,10 @@
 const logger = require("../src/logs");
+const MessageRepository = require("../repositories/MessageRepository");
+
 
 class MessageService {
-    constructor(repository) {
-        this.repository = repository;
+    constructor() {
+        this.repository = new MessageRepository();
     }
 
     async getAll() {

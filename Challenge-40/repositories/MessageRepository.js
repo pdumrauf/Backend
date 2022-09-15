@@ -1,34 +1,26 @@
-const fs = require("fs");
-const print = require("../src/print");
-const filePath = `${__dirname}/messages.json`;
+const MessageDAOMemory = require("../DAOs/message/MessageDAOMemory");
+
+let instance = null;
 
 class MessageRepository {
-    constructor(type) {
-        this.filePath = `${__dirname}/${type}.json`;
+    constructor() {
+        this.dao = new MessageDAOMemory();
     }
 
     async saveMessage(message) {
-        let file = await this.getAll(filePath);
-        print(file.messages);
-        file.messages.push(message);
-        await this.saveFile(file, this.filePath);
-        return message.id;
+        return await this.dao.saveMessage(message);
     }
 
     async getAll() {
-        let messages;
-        try {
-            const file = await fs.promises.readFile(this.filePath, "utf-8");
-            if (!file) messages = { id: 1 };
-            else messages = JSON.parse(file);
-        } catch (err) {
-            console.log(err);
-        }
-        return messages;
+        return this.dao.getAll();
     }
 
-    async saveFile(newArr, filePath) {
-        await fs.promises.writeFile(filePath, JSON.stringify(newArr, null, 2));
+    static getInstance() {
+        if (instance) {
+            return instance;
+        }
+        instance = new UserRepository();
+        return instance;
     }
 }
 

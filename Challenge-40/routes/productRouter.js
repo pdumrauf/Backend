@@ -4,8 +4,7 @@ const ProductController = require("../controllers/ProductController");
 const ProductService = require("../services/ProductService");
 const ProductRepository = require("../repositories/ProductRepository");
 
-const productRepository = new ProductRepository("products");
-const productService = new ProductService(productRepository);
+const productService = new ProductService();
 const productController = new ProductController(productService);
 
 const productRouter = new Router();

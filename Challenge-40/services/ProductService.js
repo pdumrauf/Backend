@@ -1,19 +1,15 @@
-const logger = require("../src/logs");
+const ProductRepository = require("../repositories/ProductRepository");
 
 class ProductService {
-    constructor(repository) {
-        this.repository = repository;
+    constructor() {
+        this.repository = new ProductRepository();
     }
     async getAll() {
-        const data = await this.repository.getAll();
-        return data;
+        const datos = await this.repository.getAll();
+        return datos;
     }
     async createProduct(data) {
-        try {
-            return await this.repository.saveProduct(data);
-        } catch (err) {
-            logger.error(err.message);
-        }
+        return await this.repository.saveProduct(data);
     }
 }
 

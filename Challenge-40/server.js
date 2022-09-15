@@ -21,7 +21,6 @@ const ProductService = require("./services/ProductService");
 const MessageRepository = require("./repositories/MessageRepository");
 const ProductRepository = require("./repositories/ProductRepository");
 
-//const randomRouter = require("./routes/randomRouter");
 const appRouter = require("./routes/appRouter");
 const authRouter = require("./routes/authRouter");
 const productRouter = require("./routes/productRouter");
@@ -63,7 +62,6 @@ app.use(flash());
 app.use(express.static("./public"));
 
 app.use(compression());
-//app.use("/api", randomRouter);
 app.use("/auth", authRouter);
 app.use("/products", productRouter);
 app.use("/", appRouter);
@@ -122,15 +120,15 @@ app.get("*", (req, res) => {
 
 io.on("connection", async (socket) => {
     console.log(`new user id: ${socket.id}`);
+    const messages = await messageService.getAll();
 
+    socket.emit("success", normalizeMessages(messages));
     socket.on("addProduct", async (data) => {
-        console.log(data);
         const newProduct = await productService.createProduct(data);
-        console.log(newProduct);
         io.emit("newProduct", newProduct);
     });
 
-    //chat
+    /*chat
     socket.on("login", async () => {
         const messages = await messageService.getAll();
         normalizeMessages(messages);
@@ -140,7 +138,7 @@ io.on("connection", async (socket) => {
     socket.on("addMessage", async (data) => {
         const newMessage = await messageService.createMessage(data);
         io.emit("newMessage", newMessage);
-    });
+    });*/
 });
 
 httpServer.listen(PORT, () => console.log(`Server listening on port ${PORT}`));

@@ -1,21 +1,40 @@
-const { createHash } = require("../src/isValidPassword");
+const UserDTO = require("../DTOs/UserDTO");
+const userDAOFactory = require("../factories/userDAOFactory");
+let instance = null;
 
 class UserRepository {
-    constructor(model) {
-        this.model = model;
+    constructor() {
+        this.dao = userDAOFactory(process.env.STORAGE);
+    }
+
+    async getById(id) {
+        const user = await this.dao.getById(id);
+        const usersDTO = new UserDTO(user);
+        return usersDTO;
     }
 
     async getUserByEmail(email) {
-        return await this.model.findOne({ email });
+        const user = await this.dao.getUserByEmail(email);
+
+        if (user) {
+            const userDTO = new UserDTO(user);
+            return userDTO;
+        }
+        return null;
     }
 
     async createUser(data) {
-        const newUser = new this.model({
-            email: data.email,
-            password: createHash(data.password),
-        });
-        console.log(newUser)
-        return await newUser.save();
+        const newUser = await this.dao.createUser(data);
+        const userDTO = new UserDTO(newUser);
+        return userDTO;
+    }
+
+    static getInstance() {
+        if (instance) {
+            return instance;
+        }
+        instance = new UserRepository();
+        return instance;
     }
 }
 

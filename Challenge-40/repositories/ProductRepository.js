@@ -1,35 +1,31 @@
-const fs = require("fs");
-const filePath = `${__dirname}/products.json`;
+const ProductDTO = require("../DTOs/ProductDTO");
+const productDAOFactory = require("../factories/productDAOFactory");
+
+let instance = null;
 
 class ProductRepository {
-    constructor(type) {
-        this.filePath = `${__dirname}/${type}.json`;
+    constructor() {
+        this.dao = productDAOFactory(process.env.STORAGE);
     }
 
     async saveProduct(product) {
-        let file = await this.getAll();
-        console.log(file, this.filePath);
-        product.id = file.length ?? 1;
-
-        file.push(product);
-        await this.saveFile(file, this.filePath);
-        return product;
+        const prod = await this.dao.saveProduct(product);
+        const productDTO = new ProductDTO(prod);
+        return productDTO;
     }
 
     async getAll() {
-        let products;
-        try {
-            const file = await fs.promises.readFile(filePath, "utf-8");
-            if (!file) return [];
-            else products = JSON.parse(file);
-        } catch (err) {
-            console.log(err);
-        }
-        return products;
+        const prods = await this.dao.getAll();
+        const productsDTO = prods.map((prod) => new ProductDTO(prod));
+        return productsDTO;
     }
 
-    async saveFile(newArr, filePath) {
-        await fs.promises.writeFile(filePath, JSON.stringify(newArr, null, 2));
+    static getInstance() {
+        if (instance) {
+            return instance;
+        }
+        instance = new UserRepository();
+        return instance;
     }
 }
 
