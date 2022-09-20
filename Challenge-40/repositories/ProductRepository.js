@@ -10,6 +10,7 @@ class ProductRepository {
 
     async saveProduct(product) {
         const prod = await this.dao.saveProduct(product);
+        console.log(this.dao);
         const productDTO = new ProductDTO(prod);
         return productDTO;
     }
@@ -24,7 +25,7 @@ class ProductRepository {
         if (instance) {
             return instance;
         }
-        instance = new UserRepository();
+        instance = new ProductRepository();
         return instance;
     }
 }
