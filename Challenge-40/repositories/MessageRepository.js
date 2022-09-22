@@ -16,9 +16,8 @@ class MessageRepository {
     }
 
     static getInstance() {
-        if (instance) {
-            return instance;
-        }
+        if (instance) return instance;
+
         instance = new UserRepository();
         return instance;
     }
