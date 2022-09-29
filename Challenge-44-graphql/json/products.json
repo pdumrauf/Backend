@@ -1,0 +1,14 @@
+[
+  {
+    "title": "pizza",
+    "price": "3",
+    "thumbnail": "",
+    "id": 30
+  },
+  {
+    "title": "videogames",
+    "price": 80,
+    "thumbnail": "www.fr",
+    "id": 31
+  }
+]

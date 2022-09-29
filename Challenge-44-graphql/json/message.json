@@ -1,0 +1,45 @@
+{
+  "id": 1,
+  "messages": [
+    {
+      "text": "hola",
+      "author": {
+        "id": "alan@alan.com",
+        "name": "alan",
+        "lastname": "mathiasen",
+        "age": "28",
+        "alias": "el alan",
+        "avatar": "url"
+      },
+      "time": "9/6/2022 15:25:45"
+    },
+    {
+      "text": "mientras mas mensajes mejor la compresión?",
+      "author": {
+        "id": "alan@out.com",
+        "name": "alan",
+        "lastname": "mathiasen",
+        "age": "2",
+        "alias": "alan1234",
+        "avatar": "url"
+      },
+      "time": "9/6/2022 17:4:51"
+    },
+    {
+      "text": "as",
+      "author": {
+        "id": "a",
+        "name": "a",
+        "lastname": "a",
+        "age": "",
+        "alias": "a",
+        "avatar": "a"
+      },
+      "time": "8/8/2022 16:35:37"
+    },
+    {
+      "text": "asdas",
+      "time": "15/8/2022 15:34:41"
+    }
+  ]
+}
